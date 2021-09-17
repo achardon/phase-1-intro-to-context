@@ -59,11 +59,25 @@ function createTimeOutEvent (empObj, dateStamp) {
 }
 
 function hoursWorkedOnDate (empObj, dateStamp) {
-    const timeIn = empObj.timeInEvents[0].hour
-    const timeOut = empObj.timeOutEvents[0].hour
+    let timeIn = ''
+    let timeOut = ''
+    //find timeIn events that match date stamp
+    empObj.timeInEvents.forEach((x) => {
+        if (x.date === dateStamp) {
+            timeIn = x.hour
+        }
+    })
+    //find timeOut events that match date stamp
+    empObj.timeOutEvents.forEach((x) => {
+        if (x.date === dateStamp) {
+            timeOut = x.hour
+        }
+    })
+    //calculate hours worked 
     const hoursWorked = (timeOut - timeIn)/100
     //return hours worked as integer
     return hoursWorked
+    
 }
 
 function wagesEarnedOnDate (empObj, dateStamp) {
@@ -73,18 +87,27 @@ function wagesEarnedOnDate (empObj, dateStamp) {
 }
 
 function allWagesFor (empObj) {
-    allEmployeeRecords.forEach(emp => {
-        if (empObj.firstName === emp.firstName) {
-            console.log ('yes it is true')
-        }
-        else {
-            console.log('not the same')
-        }
-    })
+    //need to figure out how to get each date instance, then call wagesEarnedOnDate for each of those dates
+    
+
     //return pay owed for all dates
 }
 
+function calculatePayroll (arry) {
+    console.log('last function')
+    //return sum of pay owed to all employees
+}
+
+
+//examples for practice
 createEmployeeRecords([["moe", "sizlak", "barkeep", 2],
         ["bartholomew", "simpson", "scamp", 3]])
 
-createEmployeeRecord(["alex", "sizlak", "barkeep", 2])
+const example = createEmployeeRecord(["alex", "sizlak", "barkeep", 2])
+createTimeInEvent(example, "2015-02-26 1100")
+createTimeInEvent(example, "2015-02-27 1100")
+createTimeInEvent(example, "2015-02-28 1100")
+
+createTimeOutEvent(example, "2015-02-26 1700")
+createTimeOutEvent(example, "2015-02-27 1700")
+createTimeOutEvent(example, "2015-02-28 1700")
