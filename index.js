@@ -17,15 +17,18 @@ function createEmployeeRecord([string1, string2, string3, number]) {
 
 function createEmployeeRecords (arrays) {
     //console.log(arrays)
-    const arrOfObjects = []
-    arrays.forEach((array) => {
-        const newObj = createEmployeeRecord(array)
-        console.log(newObj)
-        arrOfObjects.push(newObj)
-        //allEmployeeRecords.push(newObj)
-    })
-    //return array of objects
-    return arrOfObjects
+    return arrays.map(array => createEmployeeRecord(array))
+
+    // below is how you would do it without .map
+    // const arrOfObjects = []
+    // arrays.forEach((array) => {
+    //     const newObj = createEmployeeRecord(array)
+    //     console.log(newObj)
+    //     arrOfObjects.push(newObj)
+    //     //allEmployeeRecords.push(newObj)
+    // })
+    // //return array of objects
+    // return arrOfObjects
 }
 
 function createTimeInEvent (empObj, dateStamp) {
@@ -94,10 +97,8 @@ function allWagesFor (empObj) {
         const newWage = wagesEarnedOnDate(empObj, date)
         wagesEarned = wagesEarned + newWage
     })
-    //debugger
-    return wagesEarned
-
     //return pay owed for all dates
+    return wagesEarned
 }
 
 function calculatePayroll (array) {
