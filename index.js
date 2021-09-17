@@ -88,14 +88,26 @@ function wagesEarnedOnDate (empObj, dateStamp) {
 
 function allWagesFor (empObj) {
     //need to figure out how to get each date instance, then call wagesEarnedOnDate for each of those dates
-    
+    const arrOfDates = empObj.timeInEvents.map(x => x.date)
+    let wagesEarned = 0; 
+    arrOfDates.forEach(date => {
+        const newWage = wagesEarnedOnDate(empObj, date)
+        wagesEarned = wagesEarned + newWage
+    })
+    //debugger
+    return wagesEarned
 
     //return pay owed for all dates
 }
 
-function calculatePayroll (arry) {
-    console.log('last function')
+function calculatePayroll (array) {
+    //const reducer = (previousValue, currentValue) => previousValue + currentValue
+    let totalPayroll = 0
+    array.forEach(employee => {
+        totalPayroll = totalPayroll + allWagesFor(employee)
+    })
     //return sum of pay owed to all employees
+    return totalPayroll
 }
 
 
